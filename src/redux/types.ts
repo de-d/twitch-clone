@@ -1,6 +1,7 @@
 export interface RootState {
   user: {
     token: string;
+    visibleLeftChannelPanel: boolean;
   };
   searchChannelState: {
     channelName: string;

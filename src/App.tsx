@@ -3,6 +3,7 @@ import LoginPage from "./pages/login-page";
 import HomePage from "./pages/home-page";
 import SearchPage from "./pages/search-page";
 import StreamPage from "./pages/stream-page";
+import FollowingPage from "./pages/following-page";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -25,11 +26,15 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
+    path: "/following",
+    element: <FollowingPage />,
+  },
+  {
     path: "/search",
     element: <SearchPage />,
   },
   {
-    path: "/stream",
+    path: "/stream/:channelName",
     element: <StreamPage />,
   },
 ]);

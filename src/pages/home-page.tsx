@@ -4,15 +4,17 @@ import { AppDispatch } from "../redux/store";
 import { RootState } from "../redux/types";
 import { fetchUserID, fetchTopCategories, fetchTopStreams } from "../redux/api/actions";
 import { Box } from "@mui/material";
-import Header from "../components/header";
-import LeftChannelList from "../components/left-channel-list";
-import CategoriesCard from "../components/home/categories-card";
-import TopStreamCard from "../components/home/topstream-card";
+import Header from "../components/header/header";
+import LeftChannelList from "../components/main/left-channel-list/left-channel-list";
+import CategoriesCard from "../components/main/home/categories-card";
+import TopStreamCard from "../components/main/home/topstream-card";
+import MainWrapper from "../components/main/main-container";
 
 function HomePage() {
   const dispatch = useDispatch<AppDispatch>();
   const topCategories = useSelector((state: RootState) => state.topCategory);
   const topStreams = useSelector((state: RootState) => state.topStream);
+  const visible = useSelector((state: RootState) => state.user.visibleLeftChannelPanel);
 
   useEffect(() => {
     const getAccessTokenFromHash = () => {
@@ -35,20 +37,32 @@ function HomePage() {
     <Box sx={{ margin: "0px", padding: "0px" }}>
       <Header />
       <LeftChannelList />
-      <Box sx={{ display: "flex", flexDirection: "column", padding: "60px 0 0 85px" }}>
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold" }}>Categories</p>
-        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "start", gap: "15px", borderBottom: "1px solid gray" }}>
-          {topCategories.slice(0, 12).map((category) => (
-            <CategoriesCard key={category.id} category={category} />
-          ))}
+      <MainWrapper>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold" }}>Categories</p>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "start",
+              gap: "15px",
+              overflowWrap: "normal",
+              flexWrap: "wrap",
+              borderBottom: "1px solid gray",
+            }}
+          >
+            {visible
+              ? topCategories.slice(0, 10).map((category) => <CategoriesCard key={category.id} category={category} />)
+              : topCategories.slice(0, 12).map((category) => <CategoriesCard key={category.id} category={category} />)}
+          </Box>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold" }}>Top Steam</p>
+          <Box sx={{ display: "flex", flexDirection: "row", alignItems: "start", gap: "15px", borderBottom: "1px solid gray", flexWrap: "wrap" }}>
+            {topStreams.map((stream) => (
+              <TopStreamCard key={stream.id} topStream={stream} />
+            ))}
+          </Box>
         </Box>
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold" }}>Top Steam</p>
-        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "start", gap: "15px", borderBottom: "1px solid gray", flexWrap: "wrap" }}>
-          {topStreams.map((stream) => (
-            <TopStreamCard key={stream.id} topStream={stream} />
-          ))}
-        </Box>
-      </Box>
+      </MainWrapper>
     </Box>
   );
 }

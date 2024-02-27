@@ -87,3 +87,27 @@ export const fetchTopStreams = createAsyncThunk<topStream[], string, { state: Ro
     return rejectWithValue("Failed to fetch top streams");
   }
 });
+
+export const fetchCategoryStreams = createAsyncThunk<topStream[], string, { state: RootState }>(
+  "api/fetchCategoryStreams",
+  async (gameID, { rejectWithValue }) => {
+    const userToken = localStorage.getItem("access_token");
+    try {
+      const response = await fetch(`https://api.twitch.tv/helix/streams?game_id=${gameID}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Client-Id": "YOUR_CLIENT_ID",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log(data.data);
+      return data.data;
+    } catch (error) {
+      return rejectWithValue("Failed to fetch top streams");
+    }
+  }
+);

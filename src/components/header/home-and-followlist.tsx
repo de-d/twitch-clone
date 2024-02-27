@@ -9,6 +9,9 @@ function HomeAndFollowList() {
   function backToHome() {
     navigate("/home");
   }
+  function goToFollowing() {
+    navigate("/following");
+  }
   return (
     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "center", width: "384px", gap: "20px" }}>
       <Box sx={{ display: "flex", padding: "5px" }}>
@@ -16,7 +19,10 @@ function HomeAndFollowList() {
           <img src={HomeIcon} alt="Twitch Glitch Purple" />
         </Button>
       </Box>
-      <Button sx={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold", textTransform: "none", padding: "0px" }}>
+      <Button
+        sx={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold", textTransform: "none", padding: "0px" }}
+        onClick={goToFollowing}
+      >
         Following
       </Button>
       <Button

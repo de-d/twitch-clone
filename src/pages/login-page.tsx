@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { fetchUserID } from "../redux/api/actions";
 import { Box, Button, Typography } from "@mui/material";
 import Logo from "../assets/home-icon.svg";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 function LoginPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,7 +22,6 @@ function LoginPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column",
         width: "100vw",
         height: "100vh",
         margin: "0px",
@@ -34,33 +34,39 @@ function LoginPage() {
           flexDirection: "column",
           alignItems: "center",
           alignSelf: "center",
-          width: "500px",
-          height: "400px ",
+          width: "450px",
+          height: "300px ",
           background: "#17111e",
           borderRadius: "10px",
           padding: "10px 0 0 0",
         }}
       >
-        <img src={Logo} alt="logo" style={{ width: "80px", height: "80px" }} />
+        <img src={Logo} alt="logo" style={{ width: "60px", height: "60px" }} />
         <Box
           sx={{
             display: "flex",
-            width: "450px",
+            width: "350px",
             height: "50px ",
             justifyContent: "center",
-            padding: "20px 0px 70px 0px",
+            padding: "15px 0 40px 0",
           }}
         >
           <Typography variant="h4" sx={{ color: "white" }}>
             Log in to Twitch Clone
           </Typography>
         </Box>
-        <Box>
+        <Box sx={{ display: "flex", gap: "10px", flexDirection: "column", alignItems: "center" }}>
           <Button
-            sx={{ color: "white", backgroundColor: "#6441a5", padding: "10px 40px", ":hover": { backgroundColor: "#6441a5" } }}
-            href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=YOUR_CLIENT_ID&redirect_uri=http://localhost:3000/home&scope=channel%3Amanage%3Apolls+channel%3Aread%3Apolls&state=state"
+            sx={{ width: "250px", color: "white", backgroundColor: "#6441a5", padding: "10px 40px", ":hover": { backgroundColor: "#6441a5" } }}
+            href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=bf87ykbfc6nqgqzxu5kq8hk2m4jt9o&redirect_uri=http://localhost:5173/home&scope=user:read:follows&state=c3ab8aa609ea11e793ae92361f002671"
           >
             Log in
+          </Button>
+          <Button
+            sx={{ width: "150px", color: "white", backgroundColor: "#808080", padding: "10px 40px", ":hover": { backgroundColor: "#808080" } }}
+            href="https://github.com/de-d"
+          >
+            <GitHubIcon />
           </Button>
         </Box>
       </Box>

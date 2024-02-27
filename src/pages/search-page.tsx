@@ -1,6 +1,6 @@
-import Header from "../components/header";
-import LeftChannelList from "../components/left-channel-list";
-import SearchList from "../components/search/search-list";
+import Header from "../components/header/header";
+import LeftChannelList from "../components/main/left-channel-list/left-channel-list";
+import SearchList from "../components/main/search/search-list";
 import { Box, Typography } from "@mui/material";
 
 function SearchPage() {
