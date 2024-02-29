@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSearchChannels, fetchUserID, fetchTopCategories, fetchTopStreams } from "./actions";
-import { SearchTwitchChannel, UserState, topCategory, topStream } from "../types";
+import { fetchSearchChannels, fetchUserID, fetchTopCategories, fetchTopStreams, fetchUsers } from "./actions";
+import { SearchTwitchChannel, UserState, topCategory, topStream, TwitchUsersData } from "../types";
 
 const searchChannelInitialState: SearchTwitchChannel[] = [];
 
@@ -54,7 +54,21 @@ const topStreamSlice = createSlice({
   },
 });
 
+const usersInitialState: TwitchUsersData[] = [];
+
+const usersSlice = createSlice({
+  name: "users",
+  initialState: usersInitialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  },
+});
+
 export const sChannelReducer = searchChannelSlice.reducer;
 export const userDetailReducer = userSlice.reducer;
 export const topCategoryReducer = topCategorySlice.reducer;
 export const topStreamReducer = topStreamSlice.reducer;
+export const usersReducer = usersSlice.reducer;

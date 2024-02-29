@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
 import { setSearchChannelName, setSearchChannelInfo } from "../../../redux/actions/channel-action";
+import { fetchUsers } from "../../../redux/api/actions";
 import { SearchTwitchChannel } from "../../../redux/types";
 import { Box, CardMedia, Typography } from "@mui/material";
 
@@ -10,13 +12,14 @@ type ChannelCardProps = {
 
 function ChannelCard({ channel }: ChannelCardProps) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { user_login } = useParams();
 
   function handleClick() {
     navigate(`/stream/${user_login}`);
     dispatch(setSearchChannelName(channel.broadcaster_login));
     dispatch(setSearchChannelInfo(channel));
+    dispatch(fetchUsers(channel.broadcaster_login));
   }
 
   return (

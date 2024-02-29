@@ -37,7 +37,7 @@ function HomePage() {
     <Box sx={{ margin: "0px", padding: "0px" }}>
       <Header />
       <LeftChannelList />
-      <MainWrapper>
+      <MainWrapper padding="65">
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold" }}>Categories</p>
           <Box

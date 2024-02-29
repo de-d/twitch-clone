@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SearchTwitchChannel, UserState, topCategory, topStream } from "../types";
+import { SearchTwitchChannel, UserState, topCategory, topStream, TwitchUsersData } from "../types";
 import { RootState } from "../types";
 
 export const fetchSearchChannels = createAsyncThunk<SearchTwitchChannel[], string, { state: RootState }>(
@@ -94,6 +94,30 @@ export const fetchCategoryStreams = createAsyncThunk<topStream[], string, { stat
     const userToken = localStorage.getItem("access_token");
     try {
       const response = await fetch(`https://api.twitch.tv/helix/streams?game_id=${gameID}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Client-Id": "YOUR_CLIENT_ID",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log(data.data);
+      return data.data;
+    } catch (error) {
+      return rejectWithValue("Failed to fetch top streams");
+    }
+  }
+);
+
+export const fetchUsers = createAsyncThunk<TwitchUsersData[], string, { state: RootState }>(
+  "api/fetchUsers",
+  async (userLogin, { rejectWithValue }) => {
+    const userToken = localStorage.getItem("access_token");
+    try {
+      const response = await fetch(`https://api.twitch.tv/helix/users?login=${userLogin}&first=100`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${userToken}`,

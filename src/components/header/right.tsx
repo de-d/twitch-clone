@@ -7,7 +7,7 @@ import Notifications from "../../assets/notifications.svg";
 import GifTitleBits from "../../assets/bits/gif-title-bits.gif";
 import GifTitle from "../../assets/bits/gif-title.gif";
 import CloseIcon from "@mui/icons-material/Close";
-import BitsPopperContent from "./bits/bits";
+import BitsPopperContent from "./bits/bits-popper";
 
 const butSx = {
   width: "20px",

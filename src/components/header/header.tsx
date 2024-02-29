@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import HomeAndFollowList from "./home-and-followlist";
-import SearchPanel from "./search-panel";
+import SearchPanel from "./search/search-panel";
 import Right from "./right";
 
 function Header() {
