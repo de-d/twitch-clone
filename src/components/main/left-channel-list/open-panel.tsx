@@ -25,7 +25,7 @@ function OpenPanel() {
           top: 50,
           width: "240px",
           height: "100vh",
-          backgroundColor: "#1e1e1e",
+          backgroundColor: "#1f1f23",
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "100%" }}>

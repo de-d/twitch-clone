@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import { ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/types";
-import { Padding } from "@mui/icons-material";
 
 interface MainWrapperProps {
   children: ReactNode;

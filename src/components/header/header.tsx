@@ -14,7 +14,7 @@ function Header() {
         top: 0,
         height: "50px",
         width: "100%",
-        backgroundColor: "#161616f2",
+        backgroundColor: "#18181b",
         zIndex: 1100,
         padding: "0px",
         margin: "0px",

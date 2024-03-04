@@ -128,8 +128,9 @@ export const fetchUsers = createAsyncThunk<TwitchUsersData[], string, { state: R
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data.data);
-      return data.data;
+      const firstItem = data.data[0];
+      console.log(firstItem);
+      return firstItem;
     } catch (error) {
       return rejectWithValue("Failed to fetch top streams");
     }

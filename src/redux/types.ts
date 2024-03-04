@@ -11,7 +11,7 @@ export interface RootState {
   topCategory: topCategory[];
   topStream: topStream[];
   userInfo: UserState;
-  searchUsers: TwitchUsersData[];
+  searchUsers: TwitchUsersData;
 }
 export interface SearchTwitchChannel {
   broadcaster_language: string;
@@ -64,7 +64,7 @@ export interface topStream {
 }
 [];
 
-export type TwitchUsersData = {
+export interface TwitchUsersData {
   id: string;
   login: string;
   display_name: string;
@@ -76,4 +76,4 @@ export type TwitchUsersData = {
   view_count: number;
   email: string;
   created_at: string;
-};
+}

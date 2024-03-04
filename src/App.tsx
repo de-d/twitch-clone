@@ -4,6 +4,7 @@ import HomePage from "./pages/home-page";
 import SearchPage from "./pages/search-page";
 import StreamPage from "./pages/stream-page";
 import FollowingPage from "./pages/following-page";
+import ChannelPage from "./pages/channel-page";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/stream/:channelName",
     element: <StreamPage />,
+  },
+  {
+    path: "/channel/:channelName",
+    element: <ChannelPage />,
   },
 ]);
 

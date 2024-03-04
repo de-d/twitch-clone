@@ -22,7 +22,7 @@ function ClosePanel() {
         top: 50,
         width: "50px",
         height: "100vh",
-        backgroundColor: "#1e1e1e",
+        backgroundColor: "#1f1f23",
       }}
     >
       <Button sx={{ padding: "10px", width: "40px", height: "40px", minWidth: 0 }} onClick={visiblePanel}>
