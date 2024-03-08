@@ -81,7 +81,7 @@ function ChannelPage() {
             display: "flex",
             flexDirection: "column",
             width: "1820px",
-            height: "459px",
+            height: "462px",
             margin: "580px 0 0 0",
             borderTopRightRadius: "10px",
             bgcolor: "#0e0e10",

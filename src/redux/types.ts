@@ -1,7 +1,17 @@
 export interface RootState {
+  app: {
+    openReactMomentModal: boolean;
+    openThankYouModal: boolean;
+    openSubscribeModal: boolean;
+  };
   user: {
     token: string;
     visibleLeftChannelPanel: boolean;
+  };
+  emote: Emote[];
+  badges: {
+    subscriber: SubBadges[];
+    bits: SubBadges[];
   };
   searchChannelState: {
     channelName: string;
@@ -76,4 +86,29 @@ export interface TwitchUsersData {
   view_count: number;
   email: string;
   created_at: string;
+}
+export interface Emote {
+  id: string;
+  name: string;
+  images: {
+    url_1x: string;
+    url_2x: string;
+    url_4x: string;
+  };
+  tier: string;
+  emote_type: string;
+  emote_set_id: string;
+  format: string[];
+  scale: string[];
+  theme_mode: string[];
+}
+export interface SubBadges {
+  id: string;
+  image_url_1x: string;
+  image_url_2x: string;
+  image_url_4x: string;
+  title: string;
+  description: string;
+  click_action: string;
+  click_url: string | null;
 }

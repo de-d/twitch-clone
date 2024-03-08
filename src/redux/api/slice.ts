@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSearchChannels, fetchUserID, fetchTopCategories, fetchTopStreams, fetchUsers } from "./actions";
-import { SearchTwitchChannel, UserState, topCategory, topStream, TwitchUsersData } from "../types";
+import { fetchSearchChannels, fetchUserID, fetchTopCategories, fetchTopStreams, fetchUsers, fetchChannelEmotes, fetchChannelBadges } from "./actions";
+import { SearchTwitchChannel, UserState, topCategory, topStream, TwitchUsersData, Emote, SubBadges } from "../types";
 
 const searchChannelInitialState: SearchTwitchChannel[] = [];
 
@@ -67,8 +67,36 @@ const usersSlice = createSlice({
   },
 });
 
+const emoteInitialState: Emote[] = [];
+
+const emoteSlice = createSlice({
+  name: "emote",
+  initialState: emoteInitialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchChannelEmotes.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  },
+});
+
+const badgesInitialState: SubBadges[] = [];
+
+const badgesSlice = createSlice({
+  name: "badges",
+  initialState: badgesInitialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchChannelBadges.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  },
+});
+
 export const sChannelReducer = searchChannelSlice.reducer;
 export const userDetailReducer = userSlice.reducer;
 export const topCategoryReducer = topCategorySlice.reducer;
 export const topStreamReducer = topStreamSlice.reducer;
 export const usersReducer = usersSlice.reducer;
+export const emoteReducer = emoteSlice.reducer;
+export const badgesReducer = badgesSlice.reducer;

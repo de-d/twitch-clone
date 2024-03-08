@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/types";
 import Header from "../components/header/header";
@@ -13,6 +14,13 @@ function StreamPage() {
   const src = `https://player.twitch.tv/?channel=${channelName}&parent=localhost`;
 
   let width = visible ? "1251px" : "1526px";
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <Box sx={{ margin: "0px", padding: "0px" }}>

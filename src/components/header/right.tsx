@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, IconButton, Popper, Fade, Typography, Modal, Paper } from "@mui/material";
+import { Box, Button, IconButton, Typography, Modal, Paper } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Bits from "../../assets/bits.svg";
 import Whispers from "../../assets/Whispers.svg";

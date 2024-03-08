@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SearchTwitchChannel, UserState, topCategory, topStream, TwitchUsersData } from "../types";
+import { SearchTwitchChannel, UserState, topCategory, topStream, TwitchUsersData, Emote, SubBadges } from "../types";
 import { RootState } from "../types";
 
 export const fetchSearchChannels = createAsyncThunk<SearchTwitchChannel[], string, { state: RootState }>(
@@ -131,6 +131,52 @@ export const fetchUsers = createAsyncThunk<TwitchUsersData[], string, { state: R
       const firstItem = data.data[0];
       console.log(firstItem);
       return firstItem;
+    } catch (error) {
+      return rejectWithValue("Failed to fetch top streams");
+    }
+  }
+);
+
+export const fetchChannelEmotes = createAsyncThunk<Emote[], string, { state: RootState }>(
+  "api/fetchChannelEmotes",
+  async (channelID, { rejectWithValue }) => {
+    const userToken = localStorage.getItem("access_token");
+    try {
+      const response = await fetch(`https://api.twitch.tv/helix/chat/emotes?broadcaster_id=${channelID}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Client-Id": "bf87ykbfc6nqgqzxu5kq8hk2m4jt9o",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      return rejectWithValue("Failed to fetch top streams");
+    }
+  }
+);
+
+export const fetchChannelBadges = createAsyncThunk<SubBadges[], string, { state: RootState }>(
+  "api/fetchChannelBadges",
+  async (channelID, { rejectWithValue }) => {
+    const userToken = localStorage.getItem("access_token");
+    try {
+      const response = await fetch(`https://api.twitch.tv/helix/chat/badges?broadcaster_id=${channelID}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Client-Id": "bf87ykbfc6nqgqzxu5kq8hk2m4jt9o",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      return data.data[0];
     } catch (error) {
       return rejectWithValue("Failed to fetch top streams");
     }
