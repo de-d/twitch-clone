@@ -22,6 +22,26 @@ function ReactMoment() {
     dispatch(setOpenThankYouModal(true));
     dispatch(setOpenReactMomentModal(false));
   }
+
+  const commonStyles = {
+    display: "flex",
+    justifyContent: "center",
+    gap: "183px",
+    alignItems: "center",
+    width: "380px",
+    margin: "10px 0",
+    padding: "20px",
+    borderRadius: "5px",
+    bgcolor: "#18181b",
+  };
+  const radioOptions = [
+    { value: "Hype", label: "Hype", imageSrc: ReactM1 },
+    { value: "Funny", label: "Funny", imageSrc: ReactM2 },
+    { value: "Love", label: "Love", imageSrc: ReactM3 },
+    { value: "Whaaat?", label: "Whaaat?", imageSrc: ReactM4 },
+    { value: "Oh no!", label: "Oh no!", imageSrc: ReactM5 },
+  ];
+
   return (
     <Box>
       <Modal open={open} onClose={() => handleClose()} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
@@ -57,121 +77,22 @@ function ReactMoment() {
                   value={selectedValue}
                   onChange={(event) => setSelectedValue(event.target.value)}
                 >
-                  <FormControlLabel
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "183px",
-                      alignItems: "center",
-                      width: "380px",
-                      margin: "10px 0",
-                      padding: "20px",
-                      borderRadius: "5px",
-                      bgcolor: "#18181b",
-                    }}
-                    value="Hype"
-                    control={<Radio sx={{ color: "white", "&.Mui-checked": { color: "#bf94ff" } }} />}
-                    label="Hype"
-                    labelPlacement="start"
-                    label={
-                      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "5px" }}>
-                        <img src={ReactM1} alt="ReactM1" style={{ width: "50px", height: "50px" }} />
-                        <p style={{ width: "100px" }}>Hype</p>
-                      </div>
-                    }
-                  />
-                  <FormControlLabel
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "183px",
-                      alignItems: "center",
-                      width: "380px",
-                      margin: "10px 0",
-                      padding: "20px",
-                      borderRadius: "5px",
-                      bgcolor: "#18181b",
-                    }}
-                    value="Funny"
-                    control={<Radio sx={{ color: "white", "&.Mui-checked": { color: "#bf94ff" } }} />}
-                    label="Funny"
-                    labelPlacement="start"
-                    label={
-                      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "5px" }}>
-                        <img src={ReactM2} alt="ReactM1" style={{ width: "50px", height: "50px" }} />
-                        <p style={{ width: "100px" }}>Funny</p>
-                      </div>
-                    }
-                  />
-                  <FormControlLabel
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "183px",
-                      alignItems: "center",
-                      width: "380px",
-                      margin: "10px 0",
-                      padding: "20px",
-                      borderRadius: "5px",
-                      bgcolor: "#18181b",
-                    }}
-                    value="Love"
-                    control={<Radio sx={{ color: "white", "&.Mui-checked": { color: "#bf94ff" } }} />}
-                    label="Love"
-                    labelPlacement="start"
-                    label={
-                      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "5px" }}>
-                        <img src={ReactM3} alt="ReactM1" style={{ width: "50px", height: "50px" }} />
-                        <p style={{ width: "100px" }}>Love</p>
-                      </div>
-                    }
-                  />
-                  <FormControlLabel
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "183px",
-                      alignItems: "center",
-                      width: "380px",
-                      margin: "10px 0",
-                      padding: "20px",
-                      borderRadius: "5px",
-                      bgcolor: "#18181b",
-                    }}
-                    value="Whaaat?"
-                    control={<Radio sx={{ color: "white", "&.Mui-checked": { color: "#bf94ff" } }} />}
-                    label="Whaaat?"
-                    labelPlacement="start"
-                    label={
-                      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "5px" }}>
-                        <img src={ReactM4} alt="ReactM1" style={{ width: "50px", height: "50px" }} />
-                        <p style={{ width: "100px" }}>Whaaat?</p>
-                      </div>
-                    }
-                  />
-                  <FormControlLabel
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "183px",
-                      alignItems: "center",
-                      width: "380px",
-                      margin: "10px 0",
-                      padding: "20px",
-                      borderRadius: "5px",
-                      bgcolor: "#18181b",
-                    }}
-                    value="Oh no!"
-                    control={<Radio sx={{ color: "white", "&.Mui-checked": { color: "#bf94ff" } }} />}
-                    label="Oh no!"
-                    labelPlacement="start"
-                    label={
-                      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "5px" }}>
-                        <img src={ReactM5} alt="ReactM1" style={{ width: "50px", height: "50px" }} />
-                        <p style={{ width: "100px" }}>Oh no!</p>
-                      </div>
-                    }
-                  />
+                  {radioOptions.map((option) => (
+                    <FormControlLabel
+                      key={option.value}
+                      sx={commonStyles}
+                      value={option.value}
+                      control={<Radio sx={{ color: "white", "&.Mui-checked": { color: "#bf94ff" } }} />}
+                      label={option.label}
+                      labelPlacement="start"
+                      label={
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "5px" }}>
+                          <img src={option.imageSrc} alt={option.label} style={{ width: "50px", height: "50px" }} />
+                          <p style={{ width: "100px" }}>{option.label}</p>
+                        </div>
+                      }
+                    />
+                  ))}
                 </RadioGroup>
               </FormControl>
               <Box sx={{ margin: "0 auto" }}>

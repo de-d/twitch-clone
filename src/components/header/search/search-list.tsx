@@ -25,7 +25,6 @@ function HeaderSearchList() {
         flexDirection: "column",
         borderRadius: "10px",
         bgcolor: "#161616f2",
-        boxShadow: "20px 20px 20px 20px rgba(0, 0, 0, 1.0)",
       }}
     >
       <Box sx={{ gap: "20px" }}>

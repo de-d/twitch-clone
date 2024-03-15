@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { RootState } from "../redux/types";
-import { fetchUserID, fetchTopCategories, fetchTopStreams } from "../redux/api/actions";
+import { fetchUserID, fetchTopCategories, fetchTopStreams, fetchFollowedStreams } from "../redux/api/actions";
 import { Box } from "@mui/material";
 import Header from "../components/header/header";
 import LeftChannelList from "../components/main/left-channel-list/left-channel-list";
@@ -30,14 +30,15 @@ function HomePage() {
       dispatch(fetchUserID(accessToken));
       dispatch(fetchTopCategories(accessToken));
       dispatch(fetchTopStreams(accessToken));
+      dispatch(fetchFollowedStreams(accessToken));
     }
   }, [dispatch]);
 
   return (
-    <Box sx={{ margin: "0px", padding: "0px" }}>
+    <Box>
       <Header />
       <LeftChannelList />
-      <MainWrapper padding="65">
+      <MainWrapper paddingClose="65" paddingOpen="260">
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold" }}>Categories</p>
           <Box

@@ -3,6 +3,8 @@ export interface RootState {
     openReactMomentModal: boolean;
     openThankYouModal: boolean;
     openSubscribeModal: boolean;
+    openBitsPopup: boolean;
+    openTurboPopover: boolean;
   };
   user: {
     token: string;
@@ -20,6 +22,7 @@ export interface RootState {
   searchChannelDetail: SearchTwitchChannel[];
   topCategory: topCategory[];
   topStream: topStream[];
+  userStreamInfo: topStream;
   userInfo: UserState;
   searchUsers: TwitchUsersData;
 }

@@ -16,8 +16,6 @@ function Header() {
         width: "100%",
         backgroundColor: "#18181b",
         zIndex: 1100,
-        padding: "0px",
-        margin: "0px",
         boxShadow: "0 0 10px 0 rgba(0, 0, 0, 1.0)",
       }}
     >

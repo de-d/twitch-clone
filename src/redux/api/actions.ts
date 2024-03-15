@@ -88,6 +88,30 @@ export const fetchTopStreams = createAsyncThunk<topStream[], string, { state: Ro
   }
 });
 
+export const fetchUserStreamInfo = createAsyncThunk<topStream[], string, { state: RootState }>(
+  "api/fetchUserStreamInfo",
+  async (userId, { rejectWithValue }) => {
+    const userToken = localStorage.getItem("access_token");
+    try {
+      const response = await fetch(`https://api.twitch.tv/helix/streams?user_id=${userId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Client-Id": "YOUR_CLIENT_ID",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log(data.data[0]);
+      return data.data[0];
+    } catch (error) {
+      return rejectWithValue("Failed to fetch top streams");
+    }
+  }
+);
+
 export const fetchCategoryStreams = createAsyncThunk<topStream[], string, { state: RootState }>(
   "api/fetchCategoryStreams",
   async (gameID, { rejectWithValue }) => {
@@ -146,7 +170,7 @@ export const fetchChannelEmotes = createAsyncThunk<Emote[], string, { state: Roo
         method: "GET",
         headers: {
           Authorization: `Bearer ${userToken}`,
-          "Client-Id": "bf87ykbfc6nqgqzxu5kq8hk2m4jt9o",
+          "Client-Id": "YOUR_CLIENT_ID",
         },
       });
       if (!response.ok) {
@@ -169,7 +193,7 @@ export const fetchChannelBadges = createAsyncThunk<SubBadges[], string, { state:
         method: "GET",
         headers: {
           Authorization: `Bearer ${userToken}`,
-          "Client-Id": "bf87ykbfc6nqgqzxu5kq8hk2m4jt9o",
+          "Client-Id": "YOUR_CLIENT_ID",
         },
       });
       if (!response.ok) {

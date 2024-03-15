@@ -20,7 +20,15 @@ function HomeAndFollowList() {
         </Button>
       </Box>
       <Button
-        sx={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold", textTransform: "none", padding: "0px" }}
+        sx={{
+          minWidth: 70,
+          fontFamily: "Inter, sans-serif",
+          fontSize: "16px",
+          color: "white",
+          fontWeight: "bold",
+          textTransform: "none",
+          padding: "0px",
+        }}
         onClick={goToFollowing}
       >
         Following
@@ -28,6 +36,7 @@ function HomeAndFollowList() {
       <Button
         sx={{
           display: "flex",
+          minWidth: 60,
           fontFamily: "Inter, sans-serif",
           fontSize: "16px",
           color: "white",
@@ -38,7 +47,7 @@ function HomeAndFollowList() {
       >
         Browse
       </Button>
-      <IconButton sx={{ padding: "0px 0px 0px 10px" }}>
+      <IconButton sx={{ minWidth: 30 }}>
         <MoreVertIcon sx={{ color: "white" }} />
       </IconButton>
     </Box>

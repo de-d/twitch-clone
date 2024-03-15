@@ -13,7 +13,8 @@ function StreamPage() {
   const visible = useSelector((state: RootState) => state.user.visibleLeftChannelPanel);
   const src = `https://player.twitch.tv/?channel=${channelName}&parent=localhost`;
 
-  let width = visible ? "1251px" : "1526px";
+  let width = visible ? "1340px" : "1540px";
+  let height = visible ? "770px" : "800px";
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -23,12 +24,12 @@ function StreamPage() {
   }, []);
 
   return (
-    <Box sx={{ margin: "0px", padding: "0px" }}>
+    <Box>
       <Header />
       <LeftChannelList />
-      <MainWrapper padding="50">
+      <MainWrapper paddingClose="50" paddingOpen="240">
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
-          <iframe src={src} width={width} height="790" frameBorder="0" allowFullScreen></iframe>
+          <iframe src={src} width={width} height={height} frameBorder="0" allowFullScreen></iframe>
           <StreamerAbout />
         </Box>
         <TwitchChatEmbed channel={channelName} parent="localhost" />

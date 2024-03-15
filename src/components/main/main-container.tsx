@@ -5,18 +5,18 @@ import { RootState } from "../../redux/types";
 
 interface MainWrapperProps {
   children: ReactNode;
-  padding?: string;
+  paddingClose?: string;
+  paddingOpen?: string;
 }
 
-function MainWrapper({ children, padding }: MainWrapperProps) {
+function MainWrapper({ children, paddingClose, paddingOpen }: MainWrapperProps) {
   const visible = useSelector((state: RootState) => state.user.visibleLeftChannelPanel);
   return (
     <Box
       sx={{
-        margin: "0px",
-        paddingLeft: visible ? "275px" : `${padding}px`,
+        paddingLeft: visible ? `${paddingOpen}px` : `${paddingClose}px`,
         paddingTop: "50px",
-        width: visible ? "calc(1820px - 275px)" : "1820px",
+        width: visible ? "1340px" : "1820px",
         height: "100vh",
       }}
     >
