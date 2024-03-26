@@ -58,7 +58,7 @@ function LoginPage() {
         <Box sx={{ display: "flex", gap: "10px", flexDirection: "column", alignItems: "center" }}>
           <Button
             sx={{ width: "250px", color: "white", backgroundColor: "#6441a5", padding: "10px 40px", ":hover": { backgroundColor: "#6441a5" } }}
-            href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=YOUR_CLIENT_ID&redirect_uri=http://localhost:5173/home&scope=user:read:follows&state=c3ab8aa609ea11e793ae92361f002671"
+            href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=YOUR_CLIENT_ID&redirect_uri=http://localhost:5173/home&scope=user:read:follows&scope=user:read:email&state=c3ab8aa609ea11e793ae92361f002671"
           >
             Log in
           </Button>

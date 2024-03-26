@@ -7,6 +7,7 @@ import {
   userDetailReducer,
   topCategoryReducer,
   topStreamReducer,
+  followingStreamsReducer,
   userStreamInfoReducer,
   usersReducer,
   emoteReducer,
@@ -25,6 +26,7 @@ export const store = configureStore({
     userId: userDetailReducer,
     topCategory: topCategoryReducer,
     topStream: topStreamReducer,
+    followingStreams: followingStreamsReducer,
     userStreamInfo: userStreamInfoReducer,
   },
 });

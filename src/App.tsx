@@ -5,6 +5,7 @@ import SearchPage from "./pages/search-page";
 import StreamPage from "./pages/stream-page";
 import FollowingPage from "./pages/following-page";
 import ChannelPage from "./pages/channel-page";
+import CategoryStreamsPage from "./pages/category-streams";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <HomePage />,
+  },
+  {
+    path: "/category/:categoryName",
+    element: <CategoryStreamsPage />,
   },
   {
     path: "/following",

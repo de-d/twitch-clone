@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { setSearchChannelName, setSearchChannelInfo } from "../../../redux/actions/channel-action";
@@ -13,10 +13,9 @@ type ChannelCardProps = {
 function ChannelCard({ channel }: ChannelCardProps) {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { user_login } = useParams();
 
   function handleClick() {
-    navigate(`/stream/${user_login}`);
+    navigate(`/stream/${channel.broadcaster_login}`);
     dispatch(setSearchChannelName(channel.broadcaster_login));
     dispatch(setSearchChannelInfo(channel));
     dispatch(fetchUsers(channel.broadcaster_login));

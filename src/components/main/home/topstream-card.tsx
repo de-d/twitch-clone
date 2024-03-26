@@ -30,7 +30,28 @@ function TopStreamCard({ topStream }: TopStreamCardProps) {
 
   return (
     <Box>
-      <Box sx={{ position: "relative" }}>
+      <Box
+        sx={{
+          position: "relative",
+          ":hover": {
+            cursor: "pointer",
+            "& img": {
+              transform: "translate(5px, -5px)",
+            },
+            "&::before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "294px",
+              height: "165px",
+              backgroundColor: "#9147ff",
+              borderRadius: "5px",
+              transition: "transform 0.2s ease-in-out",
+            },
+          },
+        }}
+      >
         <Link to={`/stream/${channelName}`} style={{ textDecoration: "none" }}>
           <CardMedia
             sx={{
@@ -40,7 +61,6 @@ function TopStreamCard({ topStream }: TopStreamCardProps) {
               transition: "transform 0.2s ease-in-out",
               ":hover": {
                 cursor: "pointer",
-                transform: "scale(1.1)",
               },
             }}
             component="img"
@@ -131,4 +151,3 @@ function TopStreamCard({ topStream }: TopStreamCardProps) {
 }
 
 export default TopStreamCard;
-//293 165

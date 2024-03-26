@@ -81,7 +81,6 @@ export const fetchTopStreams = createAsyncThunk<topStream[], string, { state: Ro
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    console.log(data.data);
     return data.data;
   } catch (error) {
     return rejectWithValue("Failed to fetch top streams");
@@ -104,7 +103,6 @@ export const fetchUserStreamInfo = createAsyncThunk<topStream[], string, { state
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data.data[0]);
       return data.data[0];
     } catch (error) {
       return rejectWithValue("Failed to fetch top streams");
@@ -128,7 +126,6 @@ export const fetchCategoryStreams = createAsyncThunk<topStream[], string, { stat
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data.data);
       return data.data;
     } catch (error) {
       return rejectWithValue("Failed to fetch top streams");
@@ -153,7 +150,6 @@ export const fetchUsers = createAsyncThunk<TwitchUsersData[], string, { state: R
       }
       const data = await response.json();
       const firstItem = data.data[0];
-      console.log(firstItem);
       return firstItem;
     } catch (error) {
       return rejectWithValue("Failed to fetch top streams");
@@ -203,6 +199,29 @@ export const fetchChannelBadges = createAsyncThunk<SubBadges[], string, { state:
       return data.data[0];
     } catch (error) {
       return rejectWithValue("Failed to fetch top streams");
+    }
+  }
+);
+
+export const fetchFollowedStreams = createAsyncThunk<topStream[], string, { state: RootState }>(
+  "api/fetchFollowedStreams",
+  async (_, { rejectWithValue }) => {
+    const userToken = localStorage.getItem("access_token");
+    try {
+      const response = await fetch(`https://api.twitch.tv/helix/streams/followed?user_id=YOUR_USER_ID`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Client-Id": "YOUR_CLIENT_ID",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      return rejectWithValue("Failed to fetch followed streams");
     }
   }
 );

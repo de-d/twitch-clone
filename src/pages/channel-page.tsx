@@ -27,7 +27,7 @@ function ChannelPage() {
     <Box>
       <Header />
       <LeftChannelList />
-      <MainWrapper padding="50">
+      <MainWrapper paddingClose="50" paddingOpen="50">
         <Box sx={{ position: "absolute", zIndex: 1 }}>
           {liveOrNot ? (
             <iframe src={src} width="1853" height="1042" frameBorder="0" allowFullScreen></iframe>

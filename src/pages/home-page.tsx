@@ -14,6 +14,7 @@ function HomePage() {
   const dispatch = useDispatch<AppDispatch>();
   const topCategories = useSelector((state: RootState) => state.topCategory);
   const topStreams = useSelector((state: RootState) => state.topStream);
+  const followingStreams = useSelector((state: RootState) => state.followingStreams);
   const visible = useSelector((state: RootState) => state.user.visibleLeftChannelPanel);
 
   useEffect(() => {
@@ -46,19 +47,47 @@ function HomePage() {
               display: "flex",
               flexDirection: "row",
               alignItems: "start",
-              gap: "15px",
+              width: visible ? "1515px" : "auto",
+              gap: "18px",
               overflowWrap: "normal",
               flexWrap: "wrap",
               borderBottom: "1px solid gray",
             }}
           >
-            {visible
-              ? topCategories.slice(0, 10).map((category) => <CategoriesCard key={category.id} category={category} />)
-              : topCategories.slice(0, 12).map((category) => <CategoriesCard key={category.id} category={category} />)}
+            {topCategories.slice(0, visible ? 10 : 12).map((category) => (
+              <CategoriesCard key={category.id} category={category} />
+            ))}
+          </Box>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold" }}>Following live channels</p>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "start",
+              width: visible ? "1515px" : "auto",
+              gap: "15px",
+              borderBottom: "1px solid gray",
+              flexWrap: "wrap",
+              paddingBottom: "15px",
+            }}
+          >
+            {followingStreams.slice(0, visible ? 5 : 6).map((stream) => (
+              <TopStreamCard key={stream.id} topStream={stream} />
+            ))}
           </Box>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", color: "white", fontWeight: "bold" }}>Top Steam</p>
-          <Box sx={{ display: "flex", flexDirection: "row", alignItems: "start", gap: "15px", borderBottom: "1px solid gray", flexWrap: "wrap" }}>
-            {topStreams.map((stream) => (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "start",
+              width: visible ? "1515px" : "auto",
+              gap: "15px",
+              borderBottom: "1px solid gray",
+              flexWrap: "wrap",
+            }}
+          >
+            {topStreams.slice(0, visible ? 15 : 18).map((stream) => (
               <TopStreamCard key={stream.id} topStream={stream} />
             ))}
           </Box>

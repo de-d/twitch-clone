@@ -1,8 +1,8 @@
-import { Box, Button, IconButton } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { AppDispatch } from "../../../redux/store";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import OpenFollowChannelLeftPanel from "../../../assets/LCL-icon.svg";
 import FollowChannelsIcon from "../../../assets/follow-channels.svg";
+import ClosePanelElements from "./close-panel-elements";
 import { useDispatch } from "react-redux";
 import { setVisibleLeftChannelPanel } from "../../../redux/actions/user-action";
 
@@ -18,10 +18,38 @@ function ClosePanel() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        position: "fixed",
-        top: 50,
         width: "50px",
-        height: "100vh",
+        overflow: "auto",
+        overflowX: "hidden",
+        overflowY: "auto",
+        position: "fixed",
+        "&:hover": {
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: "5px",
+            height: "100%",
+            pointerEvents: "none",
+            background: "transparent",
+          },
+          "&::-webkit-scrollbar": {
+            width: "5px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#555",
+            borderRadius: "5px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "#333",
+          },
+        },
+        "&::-webkit-scrollbar": {
+          width: 0,
+        },
+        top: 50,
+        height: "94.5vh",
         backgroundColor: "#1f1f23",
       }}
     >
@@ -31,25 +59,6 @@ function ClosePanel() {
       <Box sx={{ padding: "10px" }}>
         <img src={FollowChannelsIcon} alt="follow" />
       </Box>
-
-      <IconButton>
-        <AccountCircleIcon sx={{ color: "white" }} />
-      </IconButton>
-      <IconButton>
-        <AccountCircleIcon sx={{ color: "white" }} />
-      </IconButton>
-      <IconButton>
-        <AccountCircleIcon sx={{ color: "white" }} />
-      </IconButton>
-      <IconButton>
-        <AccountCircleIcon sx={{ color: "white" }} />
-      </IconButton>
-      <IconButton>
-        <AccountCircleIcon sx={{ color: "white" }} />
-      </IconButton>
-      <IconButton>
-        <AccountCircleIcon sx={{ color: "white" }} />
-      </IconButton>
     </Box>
   );
 }

@@ -10,12 +10,12 @@ type TopStreamCardProps = {
 function ChannelInfo({ topStream }: TopStreamCardProps) {
   return (
     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "center", width: "100%" }}>
-      <IconButton>
-        <AccountCircleIcon sx={{ color: "white" }} />
+      <IconButton sx={{ color: "white", padding: "10px" }}>
+        <AccountCircleIcon sx={{ color: "white", padding: "0px" }} />
       </IconButton>
       <Box>
-        <Typography sx={{ fontSize: "12px", fontWeight: "bold", paddingLeft: "10px", color: "white" }}>{topStream.user_name}</Typography>
-        <Typography sx={{ fontSize: "10px", paddingLeft: "10px", color: "gray" }}>{topStream.game_name}</Typography>
+        <Typography sx={{ fontSize: "12px", fontWeight: "bold", color: "white" }}>{topStream.user_name}</Typography>
+        <Typography sx={{ fontSize: "10px", color: "gray" }}>{topStream.game_name}</Typography>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", marginLeft: "auto", marginRight: "10px" }}>
         <Box

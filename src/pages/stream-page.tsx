@@ -13,8 +13,8 @@ function StreamPage() {
   const visible = useSelector((state: RootState) => state.user.visibleLeftChannelPanel);
   const src = `https://player.twitch.tv/?channel=${channelName}&parent=localhost`;
 
-  let width = visible ? "1340px" : "1540px";
-  let height = visible ? "770px" : "800px";
+  let width = visible ? "1340px" : "1530px";
+  let height = visible ? "770px" : "797px";
 
   useEffect(() => {
     document.body.style.overflow = "hidden";

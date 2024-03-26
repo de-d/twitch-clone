@@ -9,6 +9,7 @@ import ChannelInfo from "./channel-info";
 function OpenPanel() {
   const dispatch = useDispatch<AppDispatch>();
   const topStreams = useSelector((state: RootState) => state.topStream);
+  const followingStreams = useSelector((state: RootState) => state.followingStreams);
   const visible = useSelector((state: RootState) => state.user.visibleLeftChannelPanel);
 
   function visiblePanel() {
@@ -21,10 +22,10 @@ function OpenPanel() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          position: "fixed",
+          position: "absolute",
           top: 50,
           width: "240px",
-          height: "100vh",
+          height: "94.5vh",
           backgroundColor: "#1f1f23",
         }}
       >
@@ -34,7 +35,44 @@ function OpenPanel() {
             <img src={OpenFollowChannelLeftPanel} alt="open" />
           </Button>
         </Box>
-        <Box sx={{ width: "100%" }}>
+        <Box
+          sx={{
+            width: "100% - 5px",
+            overflow: "auto",
+            overflowX: "hidden",
+            overflowY: "auto",
+            position: "relative",
+            "&:hover": {
+              "&::after": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                right: 0,
+                width: "5px",
+                height: "100%",
+                pointerEvents: "none",
+                background: "transparent",
+              },
+              "&::-webkit-scrollbar": {
+                width: "5px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "#555",
+                borderRadius: "5px",
+              },
+              "&::-webkit-scrollbar-thumb:hover": {
+                background: "#333",
+              },
+            },
+            "&::-webkit-scrollbar": {
+              width: 0,
+            },
+          }}
+        >
+          <Typography sx={{ paddingLeft: "10px", fontWeight: "bold", color: "white" }}>Followed Channels</Typography>
+          {followingStreams.map((stream) => (
+            <ChannelInfo key={stream.id} topStream={stream} />
+          ))}
           <Typography sx={{ paddingLeft: "10px", fontWeight: "bold", color: "white" }}>Top streams</Typography>
           {topStreams.map((stream) => (
             <ChannelInfo key={stream.id} topStream={stream} />

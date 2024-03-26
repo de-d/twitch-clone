@@ -4,6 +4,7 @@ import { AppDispatch } from "../../../redux/store";
 import { RootState } from "../../../redux/types";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField, Button } from "@mui/material";
+import { setOpenSearchModal } from "../../../redux/actions/app-action";
 import { setSearchChannelName } from "../../../redux/actions/channel-action";
 import { fetchSearchChannels } from "../../../redux/api/actions";
 import Search from "../../../assets/search.svg";
@@ -26,14 +27,15 @@ function SearchPanel() {
     setActive(false);
   }
   function handleActive() {
-    setTimeout(() => setActive(false), 2000);
+    setTimeout(() => dispatch(setOpenSearchModal(false)), 2000);
   }
   return (
-    <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column", paddingTop: "7px" }}>
+    <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column", paddingTop: "7px", zIndex: 1201 }}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <TextField
           sx={{
             height: "36px",
+            zIndex: 1201,
             "& .MuiInputBase-root": {
               height: "36px",
               borderRadius: "6px 0px 0px 6px",
@@ -62,7 +64,9 @@ function SearchPanel() {
           variant="outlined"
           autoComplete="off"
           onChange={handleSearch}
-          onFocus={() => setActive(true)}
+          onClick={() => {
+            dispatch(setOpenSearchModal(true));
+          }}
           onBlur={handleActive}
         />
         <Button
@@ -79,7 +83,8 @@ function SearchPanel() {
           <img src={Search} alt="search" />
         </Button>
       </Box>
-      <Box>{active && <HeaderSearchList />}</Box>
+
+      <HeaderSearchList />
     </Box>
   );
 }

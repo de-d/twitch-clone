@@ -15,9 +15,10 @@ function MainWrapper({ children, paddingClose, paddingOpen }: MainWrapperProps) 
     <Box
       sx={{
         paddingLeft: visible ? `${paddingOpen}px` : `${paddingClose}px`,
-        paddingTop: "50px",
-        width: visible ? "1340px" : "1820px",
-        height: "100vh",
+        width: visible ? `100% - ${paddingOpen}px` : `100% - ${paddingClose}px`,
+        height: "907px",
+        overflow: "auto",
+        zIndex: 100,
       }}
     >
       {children}

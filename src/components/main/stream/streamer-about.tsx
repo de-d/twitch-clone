@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { RootState } from "../../../redux/types";
-import { setOpenReactMomentModal, setOpenSubscribeModal } from "../../../redux/actions/app-action";
+import { setOpenReactMomentModal, setOpenSubscribeModal, setOpenShareModal } from "../../../redux/actions/app-action";
+import { fetchUserStreamInfo, fetchChannelEmotes, fetchChannelBadges } from "../../../redux/api/actions";
+
 import { Box, Typography, Button } from "@mui/material";
-import partnerImg from "../../../assets/partner.svg";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
+
 import ReactMoment from "./react-moment/react-moment";
 import ThankYouForReactMoment from "./react-moment/thank-you-modal";
 import SubscribeModal from "./subscribe/subscribe-modal";
 import ChannelAvatar from "../../main/channel/channel-avatar";
+import ShareMenu from "./stream-popup/share-popup";
+
+import partnerImg from "../../../assets/partner.svg";
 import ViewerCountIcon from "../../../assets/viewer-count-icon.svg";
 import FollowIcon from "../../../assets/follow-icon.svg";
 import HoverFollowIcon from "../../../assets/hover-follow-icon.svg";
 import SubIcon from "../../../assets/sub-icon.svg";
 import ShareIcon from "../../../assets/share-icon.svg";
 import ReportIcon from "../../../assets/report-icon.svg";
-import { fetchUserStreamInfo, fetchChannelEmotes, fetchChannelBadges } from "../../../redux/api/actions";
 
 function StreamerAbout() {
   const navigate = useNavigate();
@@ -71,6 +77,9 @@ function StreamerAbout() {
     dispatch(setOpenSubscribeModal(false));
   }
 
+  function handleOpenShareModal() {
+    dispatch(setOpenShareModal(true));
+  }
   return (
     <Box
       sx={{
@@ -102,7 +111,7 @@ function StreamerAbout() {
           {channelTags.map((tag) => (
             <Typography
               key={tag}
-              sx={{ fontSize: "12px", fontWeight: "bold", color: "#808080", backgroundColor: "#2c2c2c", padding: "2px 10px", borderRadius: "15px" }}
+              sx={{ fontSize: "12px", fontWeight: "bold", color: "#898992", backgroundColor: "#2c2c2c", padding: "2px 10px", borderRadius: "15px" }}
             >
               {tag}
             </Typography>
@@ -197,7 +206,16 @@ function StreamerAbout() {
           )}
           <SubscribeModal />
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "row", gap: "10px", alignItems: "center", margin: "0 0 0 auto" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "5px",
+            justifyContent: "end",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
           <Box sx={{ display: "flex", flexDirection: "row", gap: "5px", alignItems: "center" }}>
             <img src={ViewerCountIcon} alt="viewer" />
             <Typography sx={{ color: "#ff8280", fontWeight: "bold", fontSize: "13px" }}>{viewerCount}</Typography>
@@ -205,12 +223,15 @@ function StreamerAbout() {
           <Typography sx={{ color: "white", fontSize: "13px", fontWeight: "bold" }}>
             {hours}:{minutes}:{seconds}
           </Typography>
-          <Button style={{ maxWidth: "30px", maxHeight: "30px", minWidth: "30px", minHeight: "30px" }}>
-            <img src={ShareIcon} alt="share" style={{ width: "18px", height: "18px" }} />
-          </Button>
-          <Button style={{ maxWidth: "30px", maxHeight: "30px", minWidth: "30px", minHeight: "30px" }}>
-            <img src={ReportIcon} alt="report" />
-          </Button>
+          <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+            <Button style={{ minWidth: "30px", minHeight: "30px", padding: "0" }} onClick={() => handleOpenShareModal()}>
+              <img src={ShareIcon} alt="share" style={{ width: "20px", height: "20px" }} />
+            </Button>
+            <ShareMenu />
+            <Button style={{ minWidth: "30px", minHeight: "30px", padding: "0" }}>
+              <img src={ReportIcon} alt="report" style={{ width: "20px", height: "20px" }} />
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Box>

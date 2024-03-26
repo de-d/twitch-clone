@@ -8,7 +8,7 @@ interface TwitchChatEmbedProps {
   width?: string | number;
 }
 
-const TwitchChatEmbed: React.FC<TwitchChatEmbedProps> = ({ channel, parent, width = "340", height = "930" }) => {
+const TwitchChatEmbed: React.FC<TwitchChatEmbedProps> = ({ channel, parent, width = "340", height = "907" }) => {
   const src = `https://www.twitch.tv/embed/${encodeURIComponent(channel)}/chat?parent=${encodeURIComponent(parent)}`;
 
   return (

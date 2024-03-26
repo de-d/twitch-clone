@@ -15,10 +15,21 @@ function CategoriesCard({ category }: CategoryCardProps) {
   return (
     <Box
       sx={{
+        position: "relative",
         ":hover": {
           cursor: "pointer",
           "& img": {
-            transform: "scale(1.1)",
+            transform: "translate(5px, -5px)",
+          },
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "135px",
+            height: "189px",
+            backgroundColor: "#9147ff",
+            borderRadius: "5px",
             transition: "transform 0.2s ease-in-out",
           },
         },
@@ -29,12 +40,27 @@ function CategoriesCard({ category }: CategoryCardProps) {
           <img
             src={boxArtUrl}
             alt={category.name}
-            style={{ width: "135px", height: "189px", borderRadius: "5px", transition: "transform 0.2s ease-in-out" }}
+            style={{
+              width: "135px",
+              height: "189px",
+              borderRadius: "5px",
+              transition: "transform 0.2s ease-in-out",
+              position: "relative",
+            }}
           />
         </Box>
       </Link>
       <Box>
-        <p style={{ width: "135px", textAlign: "start", fontFamily: "Inter, sans-serif", fontSize: "14px", color: "white", fontWeight: "bold" }}>
+        <p
+          style={{
+            width: "135px",
+            textAlign: "start",
+            fontFamily: "Inter, sans-serif",
+            fontSize: "14px",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
           {category.name}
         </p>
       </Box>

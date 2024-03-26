@@ -1,10 +1,14 @@
 export interface RootState {
   app: {
+    openSearchModal: boolean;
     openReactMomentModal: boolean;
     openThankYouModal: boolean;
     openSubscribeModal: boolean;
     openBitsPopup: boolean;
     openTurboPopover: boolean;
+    openWhispersPopup: boolean;
+    openNotificationPopup: boolean;
+    openShareModal: boolean;
   };
   user: {
     token: string;
@@ -22,6 +26,7 @@ export interface RootState {
   searchChannelDetail: SearchTwitchChannel[];
   topCategory: topCategory[];
   topStream: topStream[];
+  followingStreams: topStream[];
   userStreamInfo: topStream;
   userInfo: UserState;
   searchUsers: TwitchUsersData;

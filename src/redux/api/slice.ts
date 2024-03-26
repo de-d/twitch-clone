@@ -8,6 +8,7 @@ import {
   fetchUsers,
   fetchChannelEmotes,
   fetchChannelBadges,
+  fetchFollowedStreams,
 } from "./actions";
 import { SearchTwitchChannel, UserState, topCategory, topStream, TwitchUsersData, Emote, SubBadges } from "../types";
 
@@ -58,6 +59,19 @@ const topStreamSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTopStreams.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  },
+});
+
+const followingStreamsInitialState: topStream[] = [];
+
+const followingStreamsSlice = createSlice({
+  name: "followingStreams",
+  initialState: followingStreamsInitialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchFollowedStreams.fulfilled, (state, action) => {
       return action.payload;
     });
   },
@@ -119,6 +133,7 @@ export const sChannelReducer = searchChannelSlice.reducer;
 export const userDetailReducer = userSlice.reducer;
 export const topCategoryReducer = topCategorySlice.reducer;
 export const topStreamReducer = topStreamSlice.reducer;
+export const followingStreamsReducer = followingStreamsSlice.reducer;
 export const userStreamInfoReducer = userStreamInfoSlice.reducer;
 export const usersReducer = usersSlice.reducer;
 export const emoteReducer = emoteSlice.reducer;

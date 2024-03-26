@@ -23,11 +23,9 @@ function BitsPopup() {
           position: "absolute",
           width: 400,
           bgcolor: "#1e1e1e",
-          top: "436px",
-          left: "1530px",
-          transform: "translate(-50%, -50%)",
+          top: 35,
+          left: 1320,
           color: "white",
-          zIndex: 110,
           borderRadius: "5px",
         }}
       >
@@ -73,7 +71,7 @@ function BitsPopup() {
             <img src={GifTitle} style={{ width: "18px", height: "18px" }} alt="bits" />
             Use Bits to support streamers
           </Typography>
-          <Typography sx={{ fontSize: "12px", fontWeight: "bold", width: "300px" }}>
+          <Typography sx={{ fontSize: "12px", fontWeight: "bold", width: "300px", zIndex: 13 }}>
             When you use Bits in a channel, Twitch rewards the streamer and you create an exciting moment.
           </Typography>
         </div>
