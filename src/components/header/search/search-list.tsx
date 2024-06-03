@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/types";
 import { AppDispatch } from "../../../redux/store";
+import { useCookies } from "react-cookie";
 import { setOpenSearchModal } from "../../../redux/actions/app-action";
 import { fetchSearchChannels } from "../../../redux/api/actions";
 import { Popper, Paper } from "@mui/material";
@@ -11,6 +12,7 @@ import { Box } from "@mui/material";
 
 function HeaderSearchList() {
   const dispatch = useDispatch<AppDispatch>();
+  const [cookies] = useCookies(["access_token"]);
   const search = useSelector((state: RootState) => state.searchChannelDetail);
   const searchChannelName = useSelector((state: RootState) => state.searchChannelState.channelName);
   const open = useSelector((state: RootState) => state.app.openSearchModal);
@@ -22,7 +24,7 @@ function HeaderSearchList() {
   };
 
   useEffect(() => {
-    dispatch(fetchSearchChannels(searchChannelName));
+    dispatch(fetchSearchChannels({ channelName: searchChannelName, accessToken: cookies.access_token }));
   }, [dispatch, searchChannelName]);
 
   const handleClose = () => {
@@ -41,11 +43,11 @@ function HeaderSearchList() {
           position: "fixed",
           width: "400px",
           height: "auto",
-          top: 0,
-          left: 760,
+          top: 5,
+          left: 751,
           borderRadius: "5px",
-          paddingTop: "55px",
-          boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 11px rgba(0, 0, 0, 0.1)",
+          paddingTop: "45px",
+          boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 21px rgba(0, 0, 0, 0.1)",
           backgroundColor: "#18181b",
           zIndex: 1200,
         }}

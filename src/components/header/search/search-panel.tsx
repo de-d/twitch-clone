@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../../redux/store";
 import { RootState } from "../../../redux/types";
 import { useDispatch, useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 import { Box, TextField, Button } from "@mui/material";
 import { setOpenSearchModal } from "../../../redux/actions/app-action";
 import { setSearchChannelName } from "../../../redux/actions/channel-action";
@@ -13,6 +14,7 @@ import HeaderSearchList from "./search-list";
 function SearchPanel() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const [cookies] = useCookies(["access_token"]);
   const [active, setActive] = useState(false);
   const searchChannelName = useSelector((state: RootState) => state.searchChannelState.channelName);
 
@@ -23,7 +25,7 @@ function SearchPanel() {
 
   function handleSearchButtonClick() {
     navigate("/search");
-    dispatch(fetchSearchChannels(searchChannelName));
+    dispatch(fetchSearchChannels({ channelName: searchChannelName, accessToken: cookies.access_token }));
     setActive(false);
   }
   function handleActive() {

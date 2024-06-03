@@ -7,18 +7,22 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { RootState } from "../../../redux/types";
+import { useCookies } from "react-cookie";
 import { fetchFollowedStreams } from "../../../redux/api/actions";
-import TopStreamCard from "../home/topstream-card";
+import TopStreamCard from "../home/stream-card";
 import ChannelCard from "../following/channel-card";
 
-function TPanel() {
+function TPanelFollowing() {
   const dispatch = useDispatch<AppDispatch>();
   const followingStreams = useSelector((state: RootState) => state.followingStreams);
+  const followedUsers = useSelector((state: RootState) => state.followedUsersDetails);
   const visible = useSelector((state: RootState) => state.user.visibleLeftChannelPanel);
   const [value, setValue] = useState("1");
 
+  const [cookies] = useCookies(["access_token"]);
+  const userToken = cookies.access_token;
+
   useEffect(() => {
-    const userToken = localStorage.getItem("access_token");
     if (userToken) {
       dispatch(fetchFollowedStreams(userToken));
     }
@@ -97,11 +101,13 @@ function TPanel() {
         </TabPanel>
         <TabPanel value="5" sx={{ width: "1810px", color: "white", padding: "0px" }}>
           <Typography sx={{ fontSize: "18px", fontWeight: "bold", color: "white" }}> Followed channels</Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px", flexWrap: "wrap" }}></Box>
+          <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px", flexWrap: "wrap" }}>
+            {followedUsers && followedUsers.map((followedUser) => <ChannelCard key={followedUser.id} channel={followedUser} />)}
+          </Box>
         </TabPanel>
       </TabContext>
     </Box>
   );
 }
 
-export default TPanel;
+export default TPanelFollowing;

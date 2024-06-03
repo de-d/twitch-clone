@@ -8,7 +8,10 @@ import ChannelPage from "./pages/channel-page";
 import CategoryStreamsPage from "./pages/category-streams";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import { store } from "./redux/store";
+import { persistor } from "./redux/store";
+import { CookiesProvider } from "react-cookie";
 
 const theme = createTheme({
   palette: {
@@ -51,11 +54,15 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-    </ThemeProvider>
+    <CookiesProvider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <RouterProvider router={router} />
+          </PersistGate>
+        </Provider>
+      </ThemeProvider>
+    </CookiesProvider>
   );
 }
 

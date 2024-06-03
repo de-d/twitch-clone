@@ -13,6 +13,7 @@ export interface RootState {
   user: {
     token: string;
     visibleLeftChannelPanel: boolean;
+    followedChannels: string[];
   };
   emote: Emote[];
   badges: {
@@ -27,6 +28,7 @@ export interface RootState {
   topCategory: topCategory[];
   topStream: topStream[];
   followingStreams: topStream[];
+  followedUsersDetails: TwitchUsersData[];
   userStreamInfo: topStream;
   userInfo: UserState;
   searchUsers: TwitchUsersData;

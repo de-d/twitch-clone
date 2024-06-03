@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 import { useNavigate } from "react-router-dom";
 
@@ -30,6 +31,7 @@ import ReportIcon from "../../../assets/report-icon.svg";
 function StreamerAbout() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const [cookies] = useCookies(["access_token"]);
   const channelName = useSelector((state: RootState) => state.searchChannelState.channelInfo.display_name);
   const channelTitle = useSelector((state: RootState) => state.searchChannelState.channelInfo.title);
   const channelGame = useSelector((state: RootState) => state.searchChannelState.channelInfo.game_name);
@@ -59,7 +61,7 @@ function StreamerAbout() {
   useEffect(() => {
     dispatch(fetchChannelEmotes(channelId));
     dispatch(fetchChannelBadges(channelId));
-    dispatch(fetchUserStreamInfo(channelId));
+    dispatch(fetchUserStreamInfo({ userId: channelId, accessToken: cookies.access_token }));
   }, [dispatch, channelId]);
 
   function handleClick() {

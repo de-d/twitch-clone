@@ -16,7 +16,7 @@ function MainWrapper({ children, paddingClose, paddingOpen }: MainWrapperProps) 
       sx={{
         paddingLeft: visible ? `${paddingOpen}px` : `${paddingClose}px`,
         width: visible ? `100% - ${paddingOpen}px` : `100% - ${paddingClose}px`,
-        height: "907px",
+        height: "94.9vh",
         overflow: "auto",
         zIndex: 100,
       }}

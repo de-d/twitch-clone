@@ -1,11 +1,7 @@
-import { Link } from "react-router-dom";
 import { topStream } from "../../../redux/types";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { setSearchChannelName } from "../../../redux/actions/channel-action";
-import { fetchSearchChannels } from "../../../redux/api/actions";
 import { Box, CardMedia, IconButton } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import formatViewerCount from "../../utils/formatViewer";
@@ -20,12 +16,9 @@ const getBoxArtUrl = (boxArtUrl: string, width: number, height: number): string 
 function TopStreamCard({ topStream }: TopStreamCardProps) {
   const dispatch = useDispatch<AppDispatch>();
   const boxArtUrl = getBoxArtUrl(topStream.thumbnail_url, 290, 165);
-  const channelName = useSelector((state: RootState) => state.searchChannelState.channelInfo.display_name);
-  const chName = useSelector((state: RootState) => state.searchChannelState.channelName);
 
   function handleClick() {
     dispatch(setSearchChannelName(topStream.user_login));
-    dispatch(fetchSearchChannels(chName));
   }
 
   return (
@@ -52,24 +45,22 @@ function TopStreamCard({ topStream }: TopStreamCardProps) {
           },
         }}
       >
-        <Link to={`/stream/${channelName}`} style={{ textDecoration: "none" }}>
-          <CardMedia
-            sx={{
-              width: "290px",
-              height: "165px",
-              borderRadius: "5px",
-              transition: "transform 0.2s ease-in-out",
-              ":hover": {
-                cursor: "pointer",
-              },
-            }}
-            component="img"
-            image={boxArtUrl}
-            alt={topStream.user_name}
-            title={topStream.user_name}
-            onClick={handleClick}
-          />
-        </Link>
+        <CardMedia
+          sx={{
+            width: "290px",
+            height: "165px",
+            borderRadius: "5px",
+            transition: "transform 0.2s ease-in-out",
+            ":hover": {
+              cursor: "pointer",
+            },
+          }}
+          component="img"
+          image={boxArtUrl}
+          alt={topStream.user_name}
+          title={topStream.user_name}
+          onClick={handleClick}
+        />
         <p
           style={{
             position: "absolute",
@@ -122,6 +113,7 @@ function TopStreamCard({ topStream }: TopStreamCardProps) {
               margin: "0px",
               padding: "3px 0 0 0",
             }}
+            title={topStream.title}
           >
             {topStream.title}
           </p>

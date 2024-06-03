@@ -1,11 +1,12 @@
 import { createReducer, PayloadAction } from "@reduxjs/toolkit";
-import { setUserToken, setVisibleLeftChannelPanel } from "../actions/user-action";
-import { SearchTwitchChannel } from "../types";
+import { setUserToken, setVisibleLeftChannelPanel, saveFollowedChannels } from "../actions/user-action";
+import { SearchTwitchChannel, TwitchUsersData } from "../types";
 import { setSearchChannelName, setSearchChannelInfo } from "../actions/channel-action";
 
 const initialUserState = {
   token: "",
   visibleLeftChannelPanel: false,
+  followedChannels: [] as TwitchUsersData[],
 };
 
 const userReducer = createReducer(initialUserState, (builder) => {
@@ -14,6 +15,9 @@ const userReducer = createReducer(initialUserState, (builder) => {
   });
   builder.addCase(setVisibleLeftChannelPanel, (state, action: PayloadAction<boolean>) => {
     state.visibleLeftChannelPanel = action.payload;
+  });
+  builder.addCase(saveFollowedChannels, (state, action: PayloadAction<TwitchUsersData[]>) => {
+    state.followedChannels = action.payload;
   });
 });
 

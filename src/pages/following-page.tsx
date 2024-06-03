@@ -6,7 +6,7 @@ import TPanel from "../components/main/following/tab-panel";
 
 function FollowingPage() {
   return (
-    <Box sx={{ margin: "0px", padding: "0px" }}>
+    <Box sx={{ height: "100vh", margin: "0px", padding: "0px" }}>
       <Header />
       <LeftChannelList />
       <MainWrapper paddingClose="50" paddingOpen="240">

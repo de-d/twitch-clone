@@ -3,11 +3,13 @@ import { AppDispatch } from "../../../redux/store";
 import OpenFollowChannelLeftPanel from "../../../assets/LCL-icon.svg";
 import FollowChannelsIcon from "../../../assets/follow-channels.svg";
 import ClosePanelElements from "./close-panel-elements";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/types";
 import { setVisibleLeftChannelPanel } from "../../../redux/actions/user-action";
 
 function ClosePanel() {
   const dispatch = useDispatch<AppDispatch>();
+  const followedUsers = useSelector((state: RootState) => state.followedUsersDetails);
 
   function visiblePanel() {
     dispatch(setVisibleLeftChannelPanel(true));
@@ -59,6 +61,7 @@ function ClosePanel() {
       <Box sx={{ padding: "10px" }}>
         <img src={FollowChannelsIcon} alt="follow" />
       </Box>
+      {followedUsers && followedUsers.map((followedUser) => <ClosePanelElements key={followedUser.id} followedUser={followedUser} />)}
     </Box>
   );
 }

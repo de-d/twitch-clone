@@ -9,6 +9,8 @@ import {
   fetchChannelEmotes,
   fetchChannelBadges,
   fetchFollowedStreams,
+  fetchFollowedChannels,
+  fetchFollowedUsers,
 } from "./actions";
 import { SearchTwitchChannel, UserState, topCategory, topStream, TwitchUsersData, Emote, SubBadges } from "../types";
 
@@ -59,6 +61,32 @@ const topStreamSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTopStreams.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  },
+});
+
+const followedChannelsInitialState: topStream[] = [];
+
+const followedChannelsSlice = createSlice({
+  name: "followedChannels",
+  initialState: followedChannelsInitialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchFollowedChannels.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  },
+});
+
+const followedUsersDetailsInitialState: TwitchUsersData[] = [];
+
+const followedUsersDetailsSlice = createSlice({
+  name: "followedUsersDetails",
+  initialState: followedUsersDetailsInitialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchFollowedUsers.fulfilled, (state, action) => {
       return action.payload;
     });
   },
@@ -133,6 +161,8 @@ export const sChannelReducer = searchChannelSlice.reducer;
 export const userDetailReducer = userSlice.reducer;
 export const topCategoryReducer = topCategorySlice.reducer;
 export const topStreamReducer = topStreamSlice.reducer;
+export const followedChannelsReducer = followedChannelsSlice.reducer;
+export const followedUsersDetailsReducer = followedUsersDetailsSlice.reducer;
 export const followingStreamsReducer = followingStreamsSlice.reducer;
 export const userStreamInfoReducer = userStreamInfoSlice.reducer;
 export const usersReducer = usersSlice.reducer;

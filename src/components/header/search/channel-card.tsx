@@ -33,7 +33,7 @@ function HeaderChannelCard({ channel }: ChannelCardProps) {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        width: "250px",
+        width: "250",
         height: "35px",
         padding: "5px 0 5px 10px",
       }}

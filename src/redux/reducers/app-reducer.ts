@@ -38,15 +38,35 @@ const appReducer = createReducer(initialAppState, (builder) => {
   });
   builder.addCase(setOpenBitsPopup, (state, action: PayloadAction<boolean>) => {
     state.openBitsPopup = action.payload;
+    if (action.payload) {
+      state.openTurboPopover = false;
+      state.openWhispersPopup = false;
+      state.openNotificationPopup = false;
+    }
   });
   builder.addCase(setOpenTurboPopover, (state, action: PayloadAction<boolean>) => {
     state.openTurboPopover = action.payload;
+    if (action.payload) {
+      state.openBitsPopup = false;
+      state.openWhispersPopup = false;
+      state.openNotificationPopup = false;
+    }
   });
   builder.addCase(setOpenWhispersPopup, (state, action: PayloadAction<boolean>) => {
     state.openWhispersPopup = action.payload;
+    if (action.payload) {
+      state.openBitsPopup = false;
+      state.openTurboPopover = false;
+      state.openNotificationPopup = false;
+    }
   });
   builder.addCase(setOpenNotificationPopup, (state, action: PayloadAction<boolean>) => {
     state.openNotificationPopup = action.payload;
+    if (action.payload) {
+      state.openBitsPopup = false;
+      state.openTurboPopover = false;
+      state.openWhispersPopup = false;
+    }
   });
   builder.addCase(setOpenShareModal, (state, action: PayloadAction<boolean>) => {
     state.openShareModal = action.payload;

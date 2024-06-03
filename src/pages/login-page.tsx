@@ -13,7 +13,7 @@ function LoginPage() {
   useEffect(() => {
     if (userToken) {
       localStorage.setItem("access_token", userToken);
-      dispatch(fetchUserID(userToken));
+      dispatch(fetchUserID(userToken)); //старый вариант
     }
   });
   return (

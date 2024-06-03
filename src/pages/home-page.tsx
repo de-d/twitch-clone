@@ -2,20 +2,30 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { RootState } from "../redux/types";
-import { fetchUserID, fetchTopCategories, fetchTopStreams, fetchFollowedStreams } from "../redux/api/actions";
+import {
+  fetchUserID,
+  fetchTopCategories,
+  fetchTopStreams,
+  fetchFollowedChannels,
+  fetchFollowedStreams,
+  fetchFollowedUsers,
+} from "../redux/api/actions";
+import { useCookies } from "react-cookie";
 import { Box } from "@mui/material";
 import Header from "../components/header/header";
 import LeftChannelList from "../components/main/left-channel-list/left-channel-list";
 import CategoriesCard from "../components/main/home/categories-card";
-import TopStreamCard from "../components/main/home/topstream-card";
+import TopStreamCard from "../components/main/home/stream-card";
 import MainWrapper from "../components/main/main-container";
 
 function HomePage() {
   const dispatch = useDispatch<AppDispatch>();
+  const [cookies, setCookie] = useCookies(["access_token"]);
   const topCategories = useSelector((state: RootState) => state.topCategory);
   const topStreams = useSelector((state: RootState) => state.topStream);
   const followingStreams = useSelector((state: RootState) => state.followingStreams);
   const visible = useSelector((state: RootState) => state.user.visibleLeftChannelPanel);
+  const allFollowedChannels = useSelector((state: RootState) => state.user.followedChannels);
 
   useEffect(() => {
     const getAccessTokenFromHash = () => {
@@ -27,13 +37,17 @@ function HomePage() {
     const accessToken = getAccessTokenFromHash();
 
     if (accessToken) {
-      localStorage.setItem("access_token", accessToken);
-      dispatch(fetchUserID(accessToken));
-      dispatch(fetchTopCategories(accessToken));
-      dispatch(fetchTopStreams(accessToken));
-      dispatch(fetchFollowedStreams(accessToken));
+      setCookie("access_token", accessToken, { path: "/" });
     }
-  }, [dispatch]);
+    const userToken = accessToken || cookies.access_token;
+
+    dispatch(fetchUserID(userToken));
+    dispatch(fetchTopCategories(userToken));
+    dispatch(fetchTopStreams(userToken));
+    dispatch(fetchFollowedStreams(userToken));
+    dispatch(fetchFollowedChannels(userToken));
+    dispatch(fetchFollowedUsers({ userLogins: allFollowedChannels, accessToken: userToken }));
+  }, [dispatch, setCookie, cookies.access_token]);
 
   return (
     <Box>
